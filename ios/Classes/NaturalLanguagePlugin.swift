@@ -4,7 +4,7 @@ import NaturalLanguage
 import os
 
 
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 public class NaturalLanguagePlugin: NSObject, FlutterPlugin {
   let recognizer = NLLanguageRecognizer()
   let logger = Logger()
