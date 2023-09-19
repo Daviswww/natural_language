@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:natural_language/natural_language.dart';
+import 'package:natural_language_example/model.dart';
 
 class ViewModel {
   final NaturalLanguage _naturalLanguage;
@@ -12,8 +16,8 @@ class ViewModel {
     return result;
   }
 
-  Future<String> getLanguageHypotheses(String text, int withMaximum) async {
-    final result = await _naturalLanguage.getLanguageHypotheses(text, withMaximum) ?? "NULL";
+  Future<Map<String, double>> getLanguageHypotheses(String text, int withMaximum) async {
+    final result = await _naturalLanguage.getLanguageHypotheses(text, withMaximum);
     return result;
   }
 

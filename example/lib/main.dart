@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
                       3,
                     );
                     setState(() {
-                      text = result;
+                      text = result.toString();
                     });
                   },
                   child: const Text("Mult"),

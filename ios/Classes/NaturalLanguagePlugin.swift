@@ -7,6 +7,7 @@ import os
 @available(iOS 14.0, *)
 public class NaturalLanguagePlugin: NSObject, FlutterPlugin {
   let recognizer = NLLanguageRecognizer()
+  let encoder = JSONEncoder()
   let logger = Logger()
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "natural_language", binaryMessenger: registrar.messenger())
@@ -21,8 +22,8 @@ public class NaturalLanguagePlugin: NSObject, FlutterPlugin {
     case "getDominantLanguage":
       if args != nil {
         let text = args?["text"] as? String ?? ""
-        let languages = getDominantLanguage(text: text)
-        result(languages)
+        let response = getDominantLanguage(text: text)
+        result(response)
       }else{
         result(FlutterMethodNotImplemented)
       }
@@ -30,8 +31,8 @@ public class NaturalLanguagePlugin: NSObject, FlutterPlugin {
       if args != nil {
         let text = args?["text"] as? String ?? ""
         let withMaximum = args?["withMaximum"] as? Int ?? 3
-        let languages = getLanguageHypotheses(text: text, withMaximum: withMaximum)
-        result(languages)
+        let response = getLanguageHypotheses(text: text, withMaximum: withMaximum)
+        result(response)
       }else{
         result(FlutterMethodNotImplemented)
       }
@@ -45,43 +46,9 @@ public class NaturalLanguagePlugin: NSObject, FlutterPlugin {
       }else{
         result(false)
       }
-      //    case "processString":
-      //      result("")
-      //    case "dominantLanguage":
-      //      result("")
-      //    case "languageHypotheses":
-      //      result("")
-      //    case "reset":
-      //      result("")
     default:
       result(FlutterMethodNotImplemented)
     }
-  }
-  
-  public func processString(text: String) -> Void {
-    recognizer.processString(text)
-    return
-  }
-  
-  public func dominantLanguage(text: String) -> String? {
-    let lang = recognizer.dominantLanguage
-    
-    return lang?.rawValue
-  }
-  
-  public func languageHypotheses(text: String) -> String? {
-    let lang = recognizer.languageHypotheses(withMaximum: 3)
-    var langs:[String:Double] = [:]
-    lang.forEach { (key: NLLanguage, value: Double) in
-      langs[key.rawValue] = value
-    }
-    logger.log("\(langs.description)")
-    return langs.description
-  }
-  
-  public func reset(text: String) -> Void {
-    recognizer.reset()
-    return
   }
   
   public func getDominantLanguage(text: String) -> String? {
@@ -103,8 +70,14 @@ public class NaturalLanguagePlugin: NSObject, FlutterPlugin {
     lang.forEach { (key: NLLanguage, value: Double) in
       langs[key.rawValue] = value
     }
+    
+    if let jsonData = try? encoder.encode(langs) {
+      if let jsonString = String(data: jsonData, encoding: .utf8) {
+        return jsonString
+      }
+    }
     logger.log("\(langs.description)")
-    return langs.description
+    return "{}"
   }
   
   public func isEnglish(text: String, threshold: Double)-> Bool {
@@ -114,7 +87,33 @@ public class NaturalLanguagePlugin: NSObject, FlutterPlugin {
     let isEn = lang.first { (key: NLLanguage, value: Double) in
       return key == NLLanguage.english && value > threshold
     }
-
+    
     return (isEn != nil)
+  }
+  
+  public func processString(text: String) -> Void {
+    recognizer.processString(text)
+    return
+  }
+  
+  public func dominantLanguage(text: String) -> String? {
+    let lang = recognizer.dominantLanguage
+    
+    return lang?.rawValue
+  }
+  
+  public func languageHypotheses(text: String) -> String? {
+    let lang = recognizer.languageHypotheses(withMaximum: 3)
+    var langs:[String:Double] = [:]
+    lang.forEach { (key: NLLanguage, value: Double) in
+      langs[key.rawValue] = value
+    }
+    logger.log("\(langs.description)")
+    return "{}"
+  }
+  
+  public func reset(text: String) -> Void {
+    recognizer.reset()
+    return
   }
 }

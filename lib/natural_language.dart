@@ -5,7 +5,7 @@ class NaturalLanguage {
     return NaturalLanguagePlatform.instance.getDominantLanguage(text);
   }
 
-  Future<String?> getLanguageHypotheses(String text, int withMaximum) {
+  Future<Map<String, double>> getLanguageHypotheses(String text, int withMaximum) {
     return NaturalLanguagePlatform.instance.getLanguageHypotheses(text, withMaximum);
   }
 
