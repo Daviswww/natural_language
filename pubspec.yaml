@@ -1,5 +1,5 @@
 name: natural_language
-description: A new Flutter plugin project.
+description: A Flutter plugin of Analyze natural language text and deduce its language-specific metadata.
 version: 0.0.1
 homepage:
 

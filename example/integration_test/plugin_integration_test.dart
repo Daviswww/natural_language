@@ -14,7 +14,8 @@ import 'package:natural_language/natural_language.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('getPlatformVersion test', (WidgetTester tester) async {
+  testWidgets('isEnglish test', (WidgetTester tester) async {
     final NaturalLanguage naturalLanguage = NaturalLanguage();
+    expect(await naturalLanguage.isEnglish("A Flutter plugin of Analyze natural language text and deduce its language-specific metadata.", 0.6), true);
   });
 }

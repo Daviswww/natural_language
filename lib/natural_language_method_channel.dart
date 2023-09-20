@@ -1,9 +1,6 @@
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-
 import 'natural_language_platform_interface.dart';
 
 /// An implementation of [NaturalLanguagePlatform] that uses method channels.

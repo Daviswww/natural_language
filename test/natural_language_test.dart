@@ -9,7 +9,7 @@ class MockNaturalLanguagePlatform with MockPlatformInterfaceMixin implements Nat
   Future<String> getDominantLanguage(String text) => Future.value('en');
 
   @override
-  Future<String> getLanguageHypotheses(String text, int withMaximum) => Future.value('42');
+  Future<Map<String, double>> getLanguageHypotheses(String text, int withMaximum) => Future.value({"en": 0.6});
 
   @override
   Future<bool> isEnglish(String text, double threshold) => Future.value(false);
@@ -35,10 +35,10 @@ void main() {
     MockNaturalLanguagePlatform fakePlatform = MockNaturalLanguagePlatform();
     NaturalLanguagePlatform.instance = fakePlatform;
 
-    expect(await naturalLanguagePlugin.getLanguageHypotheses("test", 3), '42');
+    expect(await naturalLanguagePlugin.getLanguageHypotheses("test", 3), {"en": 0.6});
   });
 
-  test('isLanguageHypotheses', () async {
+  test('isEnglish', () async {
     NaturalLanguage naturalLanguagePlugin = NaturalLanguage();
     MockNaturalLanguagePlatform fakePlatform = MockNaturalLanguagePlatform();
     NaturalLanguagePlatform.instance = fakePlatform;
