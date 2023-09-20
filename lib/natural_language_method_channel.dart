@@ -11,17 +11,21 @@ class MethodChannelNaturalLanguage extends NaturalLanguagePlatform {
 
   @override
   Future<String> getDominantLanguage(String text) async {
-    final result = await methodChannel.invokeMethod<String>('getDominantLanguage', {'text': text}) ?? "";
+    final result = await methodChannel
+            .invokeMethod<String>('getDominantLanguage', {'text': text}) ??
+        "";
     return result;
   }
 
   @override
-  Future<Map<String, double>> getLanguageHypotheses(String text, int withMaximum) async {
-    final result = await methodChannel.invokeMethod<String>('getLanguageHypotheses', {
-          "text": text,
-          "withMaximum": withMaximum,
-        }) ??
-        "";
+  Future<Map<String, double>> getLanguageHypotheses(
+      String text, int withMaximum) async {
+    final result =
+        await methodChannel.invokeMethod<String>('getLanguageHypotheses', {
+              "text": text,
+              "withMaximum": withMaximum,
+            }) ??
+            "";
     final decode = json.decode(result) as Map<String, dynamic>;
     final map = Map<String, double>.from(decode);
     return map;

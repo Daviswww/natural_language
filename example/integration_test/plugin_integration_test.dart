@@ -16,6 +16,10 @@ void main() {
 
   testWidgets('isEnglish test', (WidgetTester tester) async {
     final NaturalLanguage naturalLanguage = NaturalLanguage();
-    expect(await naturalLanguage.isEnglish("A Flutter plugin of Analyze natural language text and deduce its language-specific metadata.", 0.6), true);
+    expect(
+        await naturalLanguage.isEnglish(
+            "A Flutter plugin of Analyze natural language text and deduce its language-specific metadata.",
+            0.6),
+        true);
   });
 }
