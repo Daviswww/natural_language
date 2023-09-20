@@ -1,0 +1,26 @@
+name: 'PR CI'
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+jobs:
+  flutter_test:
+    name: Flutter Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.10.5'
+      - name: Set up tools
+        run: flutter pub get
+      - name: Flutter Test
+        run: flutter test
+      - name: Dart Test
+        run: dart fix --dry-run

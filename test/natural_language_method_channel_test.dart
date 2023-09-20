@@ -12,7 +12,16 @@ void main() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
       channel,
       (MethodCall methodCall) async {
-        return '42';
+        switch (methodCall.method) {
+          case "getLanguageHypotheses":
+            return '{"en": 0.9}';
+          case "getDominantLanguage":
+            return "en";
+          case "isEnglish":
+            return false;
+          default:
+            return null;
+        }
       },
     );
   });
@@ -22,10 +31,14 @@ void main() {
   });
 
   test('getDominantLanguage', () async {
-    expect(await platform.getDominantLanguage("test"), '42');
+    expect(await platform.getDominantLanguage("test"), 'en');
   });
 
   test('getLanguageHypotheses', () async {
-    expect(await platform.getLanguageHypotheses("test", 3), '42');
+    expect(await platform.getLanguageHypotheses("test", 3), {"en": 0.9});
+  });
+
+  test('isEnglish', () async {
+    expect(await platform.isEnglish("test", 0.5), false);
   });
 }
