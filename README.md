@@ -1,17 +1,38 @@
 # natural_language
+A Flutter plugin of Analyze natural language text and deduce its language-specific metadata.
 
-A new Flutter plugin project.
+## Usage
 
-## Getting Started
+### Get DominantLanguage
+Finds the most likely language of a piece of text.
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+```
+  Future<String> getDominantLanguage(String text) async {
+    final result = await _naturalLanguage.getDominantLanguage(text) ?? "NULL";
+    return result;
+  }
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Get LanguageHypotheses
+Generates the probabilities of possible languages for the processed text.
+
+```
+  Future<Map<String, double>> getLanguageHypotheses(String text, int withMaximum) async {
+    final result = await _naturalLanguage.getLanguageHypotheses(text, withMaximum);
+    return result;
+  }
+```
+
+
+### isEnglish
+Detects whether it is English.
+
+```
+  Future<bool> isEnglish(String text, double threshold) async {
+    final result = await _naturalLanguage.isEnglish(text, threshold) ?? false;
+    return result;
+  }
+```
 
 --------------------------------------------------------------------------------
 
