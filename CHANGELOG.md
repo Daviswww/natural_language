@@ -1,5 +1,5 @@
 ## 0.0.2
 * Update readme.
-* Add workflow
+* Update workflow
 ## 0.0.1
 * Updated repository.
