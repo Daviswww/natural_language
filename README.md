@@ -1,4 +1,4 @@
-[![CI](https://github.com/flutter/packages/actions/workflows/release.yml/badge.svg)](https://github.com/Daviswww/natural_language/actions)
+[![CI](https://github.com/Daviswww/natural_language/actions/workflows/action.yaml/badge.svg?branch=main)](https://github.com/Daviswww/natural_language/actions/workflows/action.yaml)
 # natural_language
 A Flutter plugin of Analyze natural language text and deduce its language-specific metadata.
 
