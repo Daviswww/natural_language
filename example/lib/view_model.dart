@@ -12,8 +12,10 @@ class ViewModel {
     return result;
   }
 
-  Future<Map<String, double>> getLanguageHypotheses(String text, int withMaximum) async {
-    final result = await _naturalLanguage.getLanguageHypotheses(text, withMaximum);
+  Future<Map<String, double>> getLanguageHypotheses(
+      String text, int withMaximum) async {
+    final result =
+        await _naturalLanguage.getLanguageHypotheses(text, withMaximum);
     return result;
   }
 

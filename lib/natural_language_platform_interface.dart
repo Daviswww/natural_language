@@ -27,7 +27,8 @@ abstract class NaturalLanguagePlatform extends PlatformInterface {
     throw UnimplementedError('dominantLanguage() has not been implemented.');
   }
 
-  Future<Map<String, double>> getLanguageHypotheses(String text, int withMaximum) {
+  Future<Map<String, double>> getLanguageHypotheses(
+      String text, int withMaximum) {
     throw UnimplementedError('languageHypotheses() has not been implemented.');
   }
 
