@@ -1,4 +1,6 @@
-[![CI](https://github.com/Daviswww/natural_language/actions/workflows/action.yaml/badge.svg?branch=main)](https://github.com/Daviswww/natural_language/actions/workflows/action.yaml)
+[![release](https://github.com/Daviswww/natural_language/actions/workflows/action.yaml/badge.svg?branch=main)](https://github.com/Daviswww/natural_language/actions/workflows/action.yaml)
+![Pub Version](https://img.shields.io/pub/v/natural_language)
+
 # natural_language
 A Flutter plugin of Analyze natural language text and deduce its language-specific metadata.
 
