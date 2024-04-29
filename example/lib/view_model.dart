@@ -1,4 +1,5 @@
 import 'package:natural_language/natural_language.dart';
+import 'package:natural_language_example/map_extension.dart';
 
 class ViewModel {
   final NaturalLanguage _naturalLanguage;
@@ -16,7 +17,9 @@ class ViewModel {
       String text, int withMaximum) async {
     final result =
         await _naturalLanguage.getLanguageHypotheses(text, withMaximum);
-    return result;
+
+    final sort = result.orderByValues(compareTo: (a, b) => b.compareTo(a));
+    return sort;
   }
 
   Future<bool> isEnglish(String text, double threshold) async {
