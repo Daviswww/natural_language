@@ -56,36 +56,21 @@ class _MyAppState extends State<MyApp> {
                 children: [
                   TextButton(
                     onPressed: () async {
-                      final result = await viewModel.getLanguageHypotheses(
+                      final dominantResult =
+                          await viewModel.getDominantLanguage(
+                        controller.text,
+                      );
+                      final hypothesesResult =
+                          await viewModel.getLanguageHypotheses(
                         controller.text,
                         99,
                       );
                       setState(() {
-                        langResult = result;
+                        langResult = hypothesesResult;
+                        dominant = dominantResult;
                       });
                     },
                     child: const Text("Run"),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      final result = await viewModel.getDominantLanguage(
-                        controller.text,
-                      );
-                      setState(() {
-                        dominant = result;
-                      });
-                    },
-                    child: const Text("Dominant"),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      final result = await viewModel.isEnglish(
-                        controller.text,
-                        0.9,
-                      );
-                      debugPrint("$result");
-                    },
-                    child: const Text("isEnglish"),
                   ),
                 ],
               ),
