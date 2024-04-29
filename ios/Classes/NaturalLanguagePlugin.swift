@@ -65,7 +65,7 @@ public class NaturalLanguagePlugin: NSObject, FlutterPlugin {
     var langs:[String:Double] = [:]
     recognizer.reset()
     recognizer.processString(text)
-    let lang = recognizer.languageHypotheses(withMaximum: 3)
+    let lang = recognizer.languageHypotheses(withMaximum: withMaximum)
     
     lang.forEach { (key: NLLanguage, value: Double) in
       langs[key.rawValue] = value
